@@ -1,0 +1,258 @@
+@import "tailwindcss";
+
+/* ───────────────────────────── Theme ───────────────────────────── */
+@theme inline {
+  --color-wine-900: #12040b;
+  --color-wine-800: #1d0712;
+  --color-wine-700: #2b0c1c;
+  --color-wine-600: #3d1128;
+  --color-rose-500: #d94f7a;
+  --color-rose-400: #ef7fa2;
+  --color-blush-300: #f7c2d2;
+  --color-blush-200: #fbdde6;
+  --color-gold-400: #e8c07d;
+  --color-gold-300: #f3d9a4;
+  --color-cream: #fdf6f0;
+
+  --font-display: var(--font-display), Georgia, "Times New Roman", serif;
+  --font-body: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-script: var(--font-script), cursive;
+}
+
+:root {
+  --background: #12040b;
+  --foreground: #fdf6f0;
+  color-scheme: dark;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* iOS: keep the gradient from banding at the notch */
+  background: var(--background);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  overflow-x: hidden;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body.intro-locked {
+  overflow: hidden;
+}
+
+/* ─────────────────────── Reusable utilities ────────────────────── */
+.font-display {
+  font-family: var(--font-display);
+}
+.font-script {
+  font-family: var(--font-script);
+}
+
+/* Warm ambient wash behind the whole page */
+.page-glow {
+  background:
+    radial-gradient(120% 80% at 50% -10%, #4a1330 0%, transparent 60%),
+    radial-gradient(90% 60% at 12% 30%, #35102450 0%, transparent 70%),
+    radial-gradient(90% 60% at 88% 72%, #5c1a3a45 0%, transparent 70%),
+    linear-gradient(180deg, #12040b 0%, #1d0712 40%, #12040b 100%);
+}
+
+/* Gold shimmering text */
+.text-shimmer {
+  background: linear-gradient(
+    100deg,
+    #e8c07d 0%,
+    #fff4dc 22%,
+    #f7c2d2 42%,
+    #e8c07d 62%,
+    #fff4dc 82%,
+    #e8c07d 100%
+  );
+  background-size: 260% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shimmer 7s linear infinite;
+}
+
+@keyframes shimmer {
+  from {
+    background-position: 260% 0;
+  }
+  to {
+    background-position: 0% 0;
+  }
+}
+
+/* Soft breathing glow */
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 1;
+  }
+}
+.animate-breathe {
+  animation: breathe 3.2s ease-in-out infinite;
+}
+
+/* Heartbeat */
+@keyframes heartbeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.16);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.12);
+  }
+  56% {
+    transform: scale(1);
+  }
+}
+.animate-heartbeat {
+  animation: heartbeat 2.1s ease-in-out infinite;
+}
+
+/* Slow vertical drift for decorative bokeh */
+@keyframes drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(10px, -22px, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+.animate-drift {
+  animation: drift 12s ease-in-out infinite;
+}
+
+/* Scroll cue */
+@keyframes nudge {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(9px);
+    opacity: 1;
+  }
+}
+.animate-nudge {
+  animation: nudge 2s ease-in-out infinite;
+}
+
+/* Hearts that pop on tap */
+@keyframes pop-heart {
+  0% {
+    transform: translate(-50%, -50%) scale(0.2) rotate(var(--r, 0deg));
+    opacity: 0;
+  }
+  18% {
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, calc(-50% - var(--rise, 120px)))
+      scale(var(--s, 1)) rotate(var(--r, 0deg));
+    opacity: 0;
+  }
+}
+.pop-heart {
+  animation: pop-heart var(--dur, 1300ms) cubic-bezier(0.22, 0.7, 0.3, 1)
+    forwards;
+}
+
+/* Cursor trail heart */
+@keyframes trail-fade {
+  0% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(0.1);
+    opacity: 0;
+  }
+}
+.trail-heart {
+  animation: trail-fade 900ms ease-out forwards;
+}
+
+/* Envelope */
+.letter-scene {
+  perspective: 1400px;
+}
+.flap {
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition: transform 900ms cubic-bezier(0.6, 0.02, 0.2, 1);
+}
+.flap-open {
+  transform: rotateX(-172deg);
+}
+
+.hairline {
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(232, 192, 125, 0.55),
+    transparent
+  );
+}
+
+/* Thin scrollbar that matches the theme (desktop) */
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 9px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #12040b;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #4a1330;
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #6d1c46;
+  }
+}
+
+/* ───────────────── Respect reduced-motion preferences ──────────── */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .text-shimmer,
+  .animate-breathe,
+  .animate-heartbeat,
+  .animate-drift,
+  .animate-nudge {
+    animation: none !important;
+  }
+  .text-shimmer {
+    color: #f3d9a4;
+  }
+  .flap {
+    transition-duration: 1ms;
+  }
+}
