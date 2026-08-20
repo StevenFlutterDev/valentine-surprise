@@ -2,7 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "motion/react";
-import { stats, type Stat } from "@/lib/content";
+import { type Stat } from "@/lib/content";
+import { useCopy } from "@/lib/i18n";
 import Reveal from "./Reveal";
 
 /** Resolve a stat to its number — dated stats compute from today. */
@@ -50,6 +51,8 @@ function Counter({ stat }: { stat: Stat }) {
 }
 
 export default function Stats() {
+  const { stats } = useCopy();
+
   return (
     <section className="relative px-6 py-20 sm:py-28">
       <div className="mx-auto grid max-w-4xl grid-cols-1 gap-10 text-center sm:grid-cols-3 sm:gap-6">

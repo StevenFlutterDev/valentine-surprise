@@ -41,10 +41,10 @@ const script = localFont({
 export const metadata: Metadata = {
   title: "For Angel 💗 Happy Valentine's Day",
   description:
-    "A little corner of the internet built to say thank you to Angel Tan Lee Ying — for three years of love as a wife and a mother.",
+    "A little corner of the internet built to say thank you to Angel Tan Lee Ying — for fifteen years of love as a wife and a mother.",
   openGraph: {
     title: "For Angel 💗",
-    description: "Three years of love, of giving, of you.",
+    description: "Fifteen years of love, of giving, of you.",
     type: "website",
   },
 };

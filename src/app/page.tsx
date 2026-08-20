@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { LocaleProvider } from "@/lib/i18n";
 import Intro from "@/components/Intro";
 import Hero from "@/components/Hero";
 import Stats from "@/components/Stats";
@@ -10,12 +11,13 @@ import LoveLetter from "@/components/LoveLetter";
 import Finale from "@/components/Finale";
 import HeartLayer from "@/components/HeartLayer";
 import MusicToggle from "@/components/MusicToggle";
+import LanguageToggle from "@/components/LanguageToggle";
 
 export default function Home() {
   const [entered, setEntered] = useState(false);
 
   return (
-    <>
+    <LocaleProvider>
       <Intro onEnter={() => setEntered(true)} />
 
       <main className="page-glow relative min-h-screen w-full overflow-x-hidden">
@@ -29,6 +31,7 @@ export default function Home() {
 
       <HeartLayer active={entered} />
       <MusicToggle autoStart={entered} />
-    </>
+      <LanguageToggle />
+    </LocaleProvider>
   );
 }

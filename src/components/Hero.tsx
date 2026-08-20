@@ -2,12 +2,13 @@
 
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { hero } from "@/lib/content";
+import { useCopy } from "@/lib/i18n";
 import PetalField from "./PetalField";
 
 export default function Hero({ started }: { started: boolean }) {
   const ref = useRef<HTMLElement>(null);
   const reduced = useReducedMotion();
+  const { hero } = useCopy();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -54,16 +55,6 @@ export default function Hero({ started }: { started: boolean }) {
           transition={{ duration: 1, delay: 0.35, ease }}
         >
           {hero.eyebrow}
-        </motion.p>
-
-        <motion.p
-          className="mb-5 text-[0.62rem] uppercase tracking-[0.45em] text-gold-400/85 sm:text-[0.7rem]"
-          variants={{ hidden: { opacity: 0, y: 18 }, show: { opacity: 1, y: 0 } }}
-          initial="hidden"
-          animate={show}
-          transition={{ duration: 1, delay: 0.35, ease }}
-        >
-          {hero.datetime}
         </motion.p>
 
         <motion.h1

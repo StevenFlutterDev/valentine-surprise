@@ -27,12 +27,30 @@ npm start
 
 ---
 
+## Two languages
+
+The site ships in **English and 中文（简体）**. A small globe button in the
+top-right corner switches between them, and her choice is remembered in the
+browser for next time.
+
+- English is what she sees first. To flip that, change `DEFAULT_LOCALE` at the
+  top of `src/lib/content.ts` to `"zh"`.
+- Both languages live in the same file, side by side, with identical shape —
+  whatever you add to one, add to the other, and TypeScript will tell you if
+  you forget.
+- Chinese text uses the system CJK fonts (Songti SC / PingFang SC on Mac and
+  iPhone, Microsoft YaHei on Windows). Nothing extra is downloaded, so the
+  page stays fast.
+
+---
+
 ## Changing the words
 
 **Everything Angel reads lives in one file: [`src/lib/content.ts`](src/lib/content.ts).**
 
 Open it, edit the text, save — the site updates instantly. You never need to
 touch a component to reword the letter, rename a section, or adjust the stats.
+Each entry appears twice: once under `const en` and once under `const zh`.
 
 | What you want to change | Where |
 | --- | --- |
@@ -43,6 +61,8 @@ touch a component to reword the letter, rename a section, or adjust the stats.
 | The milestone timeline cards | `milestones` + `timeline` |
 | The love letter inside the envelope | `letter` |
 | The closing message | `finale` |
+| Button labels and the language switch | `ui` |
+| Which language opens first | `DEFAULT_LOCALE` |
 
 ---
 
@@ -81,14 +101,16 @@ after a real tap, so this is by design.
 7. **The finale** — 54 little hearts fly in from all directions and assemble
    into one big heart with her name in the middle.
 
-Throughout: tapping anywhere pops a burst of hearts, and on desktop a soft
-heart trail follows the cursor.
+Throughout: tapping anywhere pops a burst of hearts, on desktop a soft heart
+trail follows the cursor, and the globe button in the corner swaps the whole
+page between English and 中文.
 
 ---
 
 ## Notes
 
-- Fully responsive; designed mobile-first (tested at 360px and up).
+- Fully responsive; designed mobile-first (tested at 360px and up), in both
+  languages.
 - Fonts (Cormorant Garamond, Inter, Great Vibes) are **self-hosted** in
   `src/fonts`, so there's no Google Fonts request and it builds offline.
 - Respects `prefers-reduced-motion` — animations shorten or stop entirely for

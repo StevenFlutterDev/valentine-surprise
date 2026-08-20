@@ -2,12 +2,13 @@
 
 import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useSpring } from "motion/react";
-import { milestones, timeline } from "@/lib/content";
+import { useCopy } from "@/lib/i18n";
 import Reveal from "./Reveal";
 
 export default function Years() {
   const ref = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
+  const { milestones, timeline, ui } = useCopy();
 
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -27,7 +28,8 @@ export default function Years() {
         </p>
         <h2 className="text-balance font-display text-3xl leading-tight font-light text-cream sm:text-5xl">
           {timeline.headingLead}
-          <br className="hidden sm:block" />{" "}
+          <br className="hidden sm:block" />
+          {ui.wordJoin}
           <span className="text-shimmer">{timeline.headingAccent}</span>
         </h2>
       </Reveal>

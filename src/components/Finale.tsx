@@ -2,7 +2,7 @@
 
 import { useMemo, useRef } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { finale, her } from "@/lib/content";
+import { useCopy } from "@/lib/i18n";
 import { makeRandom } from "@/lib/rand";
 import Reveal from "./Reveal";
 
@@ -26,6 +26,7 @@ export default function Finale() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.4 });
   const reduced = useReducedMotion();
+  const { finale, her } = useCopy();
 
   const points = useMemo(() => heartPoints(COUNT, 7.6), []);
   const starts = useMemo(() => {

@@ -2,7 +2,7 @@
 
 import { Fragment, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { her } from "@/lib/content";
+import { useCopy } from "@/lib/i18n";
 import { makeRandom } from "@/lib/rand";
 import PetalField from "./PetalField";
 
@@ -13,6 +13,7 @@ export default function Intro({ onEnter }: { onEnter: () => void }) {
   const [leaving, setLeaving] = useState(false);
   const [visible, setVisible] = useState(true);
   const reduced = useReducedMotion();
+  const { her } = useCopy();
 
   // Speed the whole sequence up dramatically for reduced-motion visitors.
   const t = reduced ? 0.15 : 1;
@@ -25,7 +26,7 @@ export default function Intro({ onEnter }: { onEnter: () => void }) {
       chars: text.split(""),
       start: parts.slice(0, i).reduce((n, w) => n + w.length, 0),
     }));
-  }, []);
+  }, [her.fullName]);
 
   // Deterministic scatter for the farewell burst (keeps render pure).
   const burst = useMemo(() => {

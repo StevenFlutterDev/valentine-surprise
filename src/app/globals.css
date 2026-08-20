@@ -14,9 +14,15 @@
   --color-gold-300: #f3d9a4;
   --color-cream: #fdf6f0;
 
-  --font-display: var(--font-display), Georgia, "Times New Roman", serif;
-  --font-body: var(--font-body), ui-sans-serif, system-ui, sans-serif;
-  --font-script: var(--font-script), cursive;
+  /* The Latin faces are self-hosted; the CJK families after them are system
+     fonts. Browsers fall back per-character, so Chinese text automatically
+     picks up the right face without downloading a multi-megabyte CJK font. */
+  --font-display: var(--font-display), "Songti SC", "STSong", "Noto Serif CJK SC",
+    "Source Han Serif SC", "SimSun", Georgia, "Times New Roman", serif;
+  --font-body: var(--font-body), "PingFang SC", "Hiragino Sans GB",
+    "Microsoft YaHei", "Noto Sans CJK SC", ui-sans-serif, system-ui, sans-serif;
+  --font-script: var(--font-script), "Xingkai SC", "Kaiti SC", "STKaiti",
+    "KaiTi", "Noto Serif CJK SC", cursive;
 }
 
 :root {
@@ -235,6 +241,25 @@ body.intro-locked {
   ::-webkit-scrollbar-thumb:hover {
     background: #6d1c46;
   }
+}
+
+/* ─────────────────────────── 中文 tuning ───────────────────────── */
+
+/* Chinese doesn't need the wide Latin letter-spacing — on Han characters it
+   reads as gaps rather than elegance. Tighten the tracked labels, and give
+   the body copy a little more room between lines. */
+html[lang^="zh"] [class*="tracking-["] {
+  letter-spacing: 0.16em;
+}
+
+html[lang^="zh"] p {
+  line-height: 1.95;
+}
+
+/* Chinese has no lowercase, so faux-small-caps tracking on headings just
+   makes them airy — pull the display type in very slightly. */
+html[lang^="zh"] .font-display {
+  letter-spacing: 0.01em;
 }
 
 /* ───────────────── Respect reduced-motion preferences ──────────── */

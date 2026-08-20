@@ -1,19 +1,17 @@
 "use client";
 
-import { sections } from "@/lib/content";
+import { useCopy } from "@/lib/i18n";
 import Reveal from "./Reveal";
 
 export default function Sections() {
+  const { sections } = useCopy();
+
   return (
     <div className="relative">
       {sections.map((s, i) => {
         const flip = i % 2 === 1;
         return (
-          <section
-            key={s.id}
-            id={s.id}
-            className="relative px-6 py-20 sm:py-28"
-          >
+          <section key={s.id} id={s.id} className="relative px-6 py-20 sm:py-28">
             {/* faint numeral watermark */}
             <span
               aria-hidden

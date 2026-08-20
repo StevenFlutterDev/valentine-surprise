@@ -2,22 +2,24 @@
 
 import { useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { letter } from "@/lib/content";
+import { useCopy } from "@/lib/i18n";
 import Reveal from "./Reveal";
 
 export default function LoveLetter() {
   const [open, setOpen] = useState(false);
   const reduced = useReducedMotion();
+  const { letter, ui, her } = useCopy();
 
   return (
     <section id="letter" className="relative px-6 py-20 sm:py-28">
       <Reveal className="mx-auto mb-12 max-w-2xl text-center sm:mb-16">
         <p className="mb-4 text-[0.6rem] uppercase tracking-[0.36em] text-gold-400/75 sm:text-[0.68rem]">
-          05 — A letter
+          {letter.kicker}
         </p>
         <h2 className="text-balance font-display text-3xl leading-tight font-light text-cream sm:text-5xl">
-          I wrote this down,{" "}
-          <span className="text-shimmer">so you can keep it</span>
+          {letter.headingLead}
+          {ui.wordJoin}
+          <span className="text-shimmer">{letter.headingAccent}</span>
         </h2>
       </Reveal>
 
@@ -37,7 +39,7 @@ export default function LoveLetter() {
               <motion.button
                 type="button"
                 onClick={() => setOpen(true)}
-                aria-label="Open the love letter"
+                aria-label={ui.openLetter}
                 className="group relative w-full max-w-md cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-300 focus-visible:ring-offset-4 focus-visible:ring-offset-wine-900 rounded-lg"
                 whileHover={reduced ? undefined : { y: -8, rotate: -0.6 }}
                 whileTap={{ scale: 0.97 }}
@@ -90,7 +92,7 @@ export default function LoveLetter() {
                     fill="#ffe9ef"
                     fontFamily="serif"
                   >
-                    A
+                    {her.firstName.charAt(0)}
                   </text>
                 </svg>
               </motion.button>
@@ -168,7 +170,7 @@ export default function LoveLetter() {
                   onClick={() => setOpen(false)}
                   className="mt-10 cursor-pointer rounded-full border border-[#8a2c4d]/30 px-5 py-2 text-[0.62rem] uppercase tracking-[0.28em] text-[#8a2c4d]/80 transition-colors hover:border-[#8a2c4d]/60 hover:bg-[#8a2c4d]/8"
                 >
-                  fold it back up
+                  {letter.close}
                 </button>
               </div>
             </motion.article>

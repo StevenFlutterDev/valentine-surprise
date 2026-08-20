@@ -3,11 +3,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
 import { MusicBox } from "@/lib/music";
+import { useCopy } from "@/lib/i18n";
 
 /** Where to put your own song — drop an mp3 here and it takes over. */
 const TRACK_URL = "/music/song.mp3";
 
 export default function MusicToggle({ autoStart }: { autoStart: boolean }) {
+  const { ui } = useCopy();
   const [playing, setPlaying] = useState(false);
   const [ready, setReady] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -83,8 +85,8 @@ export default function MusicToggle({ autoStart }: { autoStart: boolean }) {
           onClick={toggle}
           data-no-hearts
           aria-pressed={playing}
-          aria-label={playing ? "Pause the music" : "Play some music"}
-          title={playing ? "Pause the music" : "Play some music"}
+          aria-label={playing ? ui.musicPause : ui.musicPlay}
+          title={playing ? ui.musicPause : ui.musicPlay}
           initial={{ opacity: 0, scale: 0.6, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 1.4, ease: [0.16, 1, 0.3, 1] }}
